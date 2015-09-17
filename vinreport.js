@@ -2,6 +2,7 @@
     var fs = require('fs');
     var stripBom = require('strip-bom');
     var sr = require('./stimulsoft.reports.js');
+    console.log("-----------------START------------------.");
     console.log("Stimulsoft Reports Loaded");
 
     var report = new sr.Stimulsoft.Report.StiReport();
@@ -13,7 +14,7 @@
 
     var demoData = stripBom(fs.readFileSync('./VINPrintObject.json', "utf8"));
     report.dictionary.databases.clear();
-    report.regData("Demo", "Demo", demoData);
+    report.regData("VINObject","",demoData);
     console.log("Demo data loaded into the report. Tables Count: ", report.dataStore.count);
 
     report.render();
@@ -21,7 +22,6 @@
 
     // Creating export settings
     var settings = new sr.Stimulsoft.Report.Export.StiPdfExportSettings();
-
     // Creating export service
     var service = new sr.Stimulsoft.Report.Export.StiPdfExportService();
 
@@ -40,5 +40,5 @@
     // Saving rendered report in PDF into a file
     fs.writeFileSync('./VinReport.pdf', buffer);
     console.log("Rendered report saved into PDF-file.");
-    
+    console.log("-----------------------------------.");
 }
